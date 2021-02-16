@@ -1,0 +1,185 @@
+---
+openapi: 3.0.0
+info:
+  title: Turma API
+  description: "Uma simples documentação para API de Turma. \nAPI responsável por manipular e consultar dados de turmas         "
+  contact:
+    name: Wellington Alves Costa
+    email: wac.0013@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/wacsystems/Turma/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://virtserver.swaggerhub.com/wac0013/Turma/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Turma
+paths:
+  /turma:
+    post:
+      tags:
+      - Turma
+      description: Cria uma turma
+      requestBody:
+        $ref: '#/components/requestBodies/turmaCreateRequest'
+      responses:
+        "201":
+          description: Turma criada com sucesso
+          headers:
+            Location:
+              description: Retorna a uri para busca da turma criada
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+                example: https://virtserver.swaggerhub.com/wac0013/Turma/1.0.0/turma/b23decf6-6ca0-11eb-9439-0242ac130002
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+  /turma/{id}:
+    get:
+      tags:
+      - Turma
+      description: Busca uma turma pelo código fornecido
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: A turma referente ao id informado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/turmaResponse'
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+    put:
+      tags:
+      - Turma
+      description: Realiza a atualização de todos os dados da turma
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Turma atualizado com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+    patch:
+      tags:
+      - Turma
+      description: Realiza atualização parcial de uma turma
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/turmaUpdateRequest'
+      responses:
+        "204":
+          description: Turma atualizada com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+components:
+  schemas:
+    turmaResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        codigo:
+          type: string
+        disciplina:
+          type: string
+          format: uuid
+        alunos:
+          type: array
+          items:
+            type: string
+            format: uuid
+    alunosPorTurma:
+      type: object
+      properties:
+        turmaId:
+          type: string
+          format: uuid
+        alunoId:
+          type: string
+          format: uuid
+    turmaCreateRequest:
+      type: object
+      properties:
+        nome:
+          maxLength: 255
+          type: string
+        descricao:
+          maxLength: 255
+          type: string
+    turmaUpdateRequest:
+      type: object
+      properties:
+        nome:
+          maxLength: 255
+          type: string
+        descricao:
+          maxLength: 255
+          type: string
+  requestBodies:
+    turmaCreateRequest:
+      description: Turma para ser adicionada
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/turmaCreateRequest'
+          example:
+            nome: Programação Java
+            descricao: Turma destinada a desenvolvedores Java
+    turmaUpdateRequest:
+      description: Turma para ser adicionada
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/turmaUpdateRequest'

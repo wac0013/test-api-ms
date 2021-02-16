@@ -1,0 +1,168 @@
+---
+openapi: 3.0.0
+info:
+  title: Disciplina API
+  description: "Uma simples documentação para API de Disciplina. \nAPI responsável por manipular e consultar dados de disciplinas         "
+  contact:
+    name: Wellington Alves Costa
+    email: wac.0013@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/wac0013/Disciplina/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Disciplina
+paths:
+  /disciplina:
+    post:
+      tags:
+      - Disciplina
+      description: Cria uma disciplina
+      requestBody:
+        $ref: '#/components/requestBodies/disciplinaCreateRequest'
+      responses:
+        "201":
+          description: Disciplina criada com sucesso
+          headers:
+            Location:
+              description: Retorna a uri para busca da disciplina criada
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+                example: https://virtserver.swaggerhub.com/wac0013/Disciplina/1.0.0/disciplina/b23decf6-6ca0-11eb-9439-0242ac130002
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+  /disciplina/{id}:
+    get:
+      tags:
+      - Disciplina
+      description: Busca uma disciplina pelo código fornecido
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: A disciplina referente ao id informado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/disciplinaResponse'
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+    put:
+      tags:
+      - Disciplina
+      description: Realiza a atualização de todos os dados da disciplina
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Disciplina atualizado com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+    patch:
+      tags:
+      - Disciplina
+      description: Realiza atualização parcial de uma disciplina
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/disciplinaUpdateRequest'
+      responses:
+        "204":
+          description: Disciplina atualizada com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+components:
+  schemas:
+    disciplinaResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        nome:
+          type: string
+        descricao:
+          type: string
+    disciplinaCreateRequest:
+      type: object
+      properties:
+        nome:
+          maxLength: 255
+          type: string
+        descricao:
+          maxLength: 255
+          type: string
+    disciplinaUpdateRequest:
+      type: object
+      properties:
+        nome:
+          maxLength: 255
+          type: string
+        descricao:
+          maxLength: 255
+          type: string
+  requestBodies:
+    disciplinaCreateRequest:
+      description: Disciplina para ser adicionada
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/disciplinaCreateRequest'
+          example:
+            nome: Programação Java
+            descricao: Disciplina destinada a desenvolvedores Java
+    disciplinaUpdateRequest:
+      description: Disciplina para ser adicionada
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/disciplinaUpdateRequest'
