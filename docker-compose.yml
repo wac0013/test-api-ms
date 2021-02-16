@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  mysql-db:
+    image: mysql:latest
+    volumes:
+      - ./.volumes/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: j8S5HD^ET^v
+      MYSQL_USER: userDb
+      MYSQL_PASSWORD: Brp03diMFxbZ
+      MYSQL_DATABASE: portal-transparencia
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
