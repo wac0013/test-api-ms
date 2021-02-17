@@ -34,31 +34,27 @@ public class GerarArquivoCSVService {
 		return stringSplit[1] + "/" + stringSplit[0];
 	}
 	
-	private ByteArrayInputStream toCSV(List<GastoPeriodo> listaGastos) {
+	private ByteArrayInputStream toCSV(List<GastoPeriodo> listaGastos) throws IOException {
 	    final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
-	    try {
-	    	ByteArrayOutputStream out = new ByteArrayOutputStream();
-    		CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);
-			List<String> cabecalho = Arrays.asList("CodigoIBGE", "Nome Municipio", "UF", "Mes inicio", "Mes Fim", "Total Gasto");
-			csvPrinter.printRecord(cabecalho);
+	    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    	CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);
+		List<String> cabecalho = Arrays.asList("CodigoIBGE", "Nome Municipio", "UF", "Mes inicio", "Mes Fim", "Total Gasto");
+		csvPrinter.printRecord(cabecalho);
 
-    		for (GastoPeriodo gasto : listaGastos) {
-				List<String> data = Arrays.asList(String.valueOf(gasto.getMunicipio().getCodigoIBGE()),
-    					gasto.getMunicipio().getNomeIBGE(),
-    					gasto.getMunicipio().getEstado().getUf(),
-    					gasto.getMesInicio().getNumMes() + "/" + gasto.getAnoInicio().toString(),
-    					gasto.getMesFim().getNumMes() + "/" + gasto.getAnoFim().toString(),
-						NumberFormat.getCurrencyInstance().format(gasto.getTotalGasto())
-    					);
+    	for (GastoPeriodo gasto : listaGastos) {
+			List<String> data = Arrays.asList(String.valueOf(gasto.getMunicipio().getCodigoIBGE()),
+    				gasto.getMunicipio().getNomeIBGE(),
+    				gasto.getMunicipio().getEstado().getUf(),
+    				gasto.getMesInicio().getNumMes() + "/" + gasto.getAnoInicio().toString(),
+    				gasto.getMesFim().getNumMes() + "/" + gasto.getAnoFim().toString(),
+					NumberFormat.getCurrencyInstance().format(gasto.getTotalGasto())
+    			);
 
-    			csvPrinter.printRecord(data);
-    		}
+    		csvPrinter.printRecord(data);
+    	}
 
-	      	csvPrinter.flush();
-	      	return new ByteArrayInputStream(out.toByteArray());
-	    } catch (IOException e) {
-	    	throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
-	    }
+	    csvPrinter.flush();
+	    return new ByteArrayInputStream(out.toByteArray());
 	  }
 }
