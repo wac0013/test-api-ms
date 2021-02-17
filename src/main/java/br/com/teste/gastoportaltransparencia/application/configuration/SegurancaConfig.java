@@ -33,19 +33,13 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/admin/**").hasRole("ADMIN")
-                //.antMatchers("/anonymous*").anonymous()
                 .antMatchers("/login*", "/api-docs*", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                //.loginPage("/login.html")
-                //.loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/index", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login.html?error=true")
-                //.failureHandler(authenticationFailureHandler())
                 .and().logout()
-                //.logoutUrl("/perform_logout")
+                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
-                //.logoutSuccessHandler(logoutSuccessHandler());
     }
 }

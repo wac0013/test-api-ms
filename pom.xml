@@ -20,8 +20,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<spring.open.api.version>1.5.3</spring.open.api.version>
 		<model.mapper.version>2.3.9</model.mapper.version>
+
+		<bootstrap.version>4.6.0</bootstrap.version>
+        <webjars-locator.version>0.40</webjars-locator.version>
+        <font-awesome.version>5.15.2</font-awesome.version>
+		<jquery.version>3.5.1</jquery.version>
 	</properties>
 
 	<dependencies>
@@ -54,25 +58,31 @@
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars-locator.version}</version>
+        </dependency>
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>${model.mapper.version}</version>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>${font-awesome.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
 		</dependency>
+
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${spring.open.api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-security</artifactId>
-			<version>${spring.open.api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-data-rest</artifactId>
-			<version>${spring.open.api.version}</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
 		</dependency>
 
 		<dependency>
