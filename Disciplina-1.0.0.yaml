@@ -22,7 +22,7 @@ paths:
       - Disciplina
       description: Cria uma disciplina
       requestBody:
-        $ref: '#/components/requestBodies/disciplinaCreateRequest'
+        $ref: '#/components/requestBodies/DisciplinaCreateRequest'
       responses:
         "201":
           description: Disciplina criada com sucesso
@@ -63,7 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/disciplinaResponse'
+                $ref: '#/components/schemas/DisciplinaResponse'
         "400":
           description: Requisição inválida
         "401":
@@ -108,7 +108,7 @@ paths:
         schema:
           type: integer
       requestBody:
-        $ref: '#/components/requestBodies/disciplinaUpdateRequest'
+        $ref: '#/components/requestBodies/DisciplinaUpdateRequest'
       responses:
         "204":
           description: Disciplina atualizada com sucesso
@@ -122,7 +122,7 @@ paths:
           description: Erro desconhecido
 components:
   schemas:
-    disciplinaResponse:
+    DisciplinaResponse:
       type: object
       properties:
         id:
@@ -132,7 +132,12 @@ components:
           type: string
         descricao:
           type: string
-    disciplinaCreateRequest:
+        cargaHoraria:
+          type: integer
+    DisciplinaCreateRequest:
+      required:
+      - descricao
+      - nome
       type: object
       properties:
         nome:
@@ -141,7 +146,9 @@ components:
         descricao:
           maxLength: 255
           type: string
-    disciplinaUpdateRequest:
+        cargaHoraria:
+          type: integer
+    DisciplinaUpdateRequest:
       type: object
       properties:
         nome:
@@ -150,19 +157,21 @@ components:
         descricao:
           maxLength: 255
           type: string
+        cargaHoraria:
+          type: integer
   requestBodies:
-    disciplinaCreateRequest:
+    DisciplinaCreateRequest:
       description: Disciplina para ser adicionada
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/disciplinaCreateRequest'
+            $ref: '#/components/schemas/DisciplinaCreateRequest'
           example:
             nome: Programação Java
             descricao: Disciplina destinada a desenvolvedores Java
-    disciplinaUpdateRequest:
+    DisciplinaUpdateRequest:
       description: Disciplina para ser adicionada
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/disciplinaUpdateRequest'
+            $ref: '#/components/schemas/DisciplinaUpdateRequest'
