@@ -13,7 +13,7 @@ public class MesesConverter implements AttributeConverter<Meses, String> {
 
     @Override
     public String convertToDatabaseColumn(Meses e) {
-        return String.format("%02d", Arrays.asList(Meses.values()).indexOf(e)); 
+        return String.format("%02d", Arrays.asList(Meses.values()).indexOf(e) + 1);
     }
 
     @Override

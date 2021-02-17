@@ -56,8 +56,9 @@ public class GastoPeriodo implements Serializable {
 	@Getter
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Convert(converter = MesesConverter.class)
+    //@Enumerated(EnumType.STRING)
+    //@Convert(converter = MesesConverter.class)
+    @Column(length = 2)
     @Getter
     @Setter
     private Meses mesInicio;
@@ -68,7 +69,7 @@ public class GastoPeriodo implements Serializable {
     private Short anoInicio;
     
     @Column(length = 2)
-    @Enumerated(EnumType.STRING)
+    //@Convert(converter = MesesConverter.class)
     @Getter
     @Setter
     private Meses mesFim;

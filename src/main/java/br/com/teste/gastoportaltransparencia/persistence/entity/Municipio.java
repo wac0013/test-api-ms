@@ -3,10 +3,7 @@ package br.com.teste.gastoportaltransparencia.persistence.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,7 +11,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.teste.gastoportaltransparencia.domain.enums.Estados;
-import br.com.teste.gastoportaltransparencia.persistence.converter.EstadosConverter;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,7 +49,7 @@ public class Municipio implements Serializable{
 
     @Getter
     @Column(length = 2)
-    @Enumerated(EnumType.STRING)
+    //@Convert(converter = EstadosConverter.class)
     private Estados estado;
 
 }
