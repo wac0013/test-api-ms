@@ -122,6 +122,100 @@ paths:
           description: Acesso não autorizado
         "5XX":
           description: Erro desconhecido
+  /turma/{id}/aluno/{alunoId}:
+    post:
+      tags:
+      - Turma
+      description: Adiciona aluno na turma
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: alunoId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "201":
+          description: Aluno adicionado a turma com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+    delete:
+      tags:
+      - Turma
+      description: Remove aluno na turma
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: alunoId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Aluno removido da turma com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
+  /turma/{id}/disciplina/{disciplinaId}:
+    patch:
+      tags:
+      - Turma
+      description: Altera a disciplina da turma
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: disciplinaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        $ref: '#/components/requestBodies/turmaUpdateRequest'
+      responses:
+        "204":
+          description: Turma atualizada com sucesso
+        "400":
+          description: Requisição inválida
+        "401":
+          description: Acesso não autenticado
+        "403":
+          description: Acesso não autorizado
+        "5XX":
+          description: Erro desconhecido
 components:
   schemas:
     turmaResponse:
@@ -140,16 +234,14 @@ components:
           items:
             type: string
             format: uuid
-    alunosPorTurma:
-      type: object
-      properties:
-        turmaId:
-          type: string
-          format: uuid
-        alunoId:
-          type: string
-          format: uuid
+        totalVagas:
+          type: integer
     turmaCreateRequest:
+      required:
+      - descricao
+      - disciplina
+      - nome
+      - totalVagas
       type: object
       properties:
         nome:
@@ -158,6 +250,11 @@ components:
         descricao:
           maxLength: 255
           type: string
+        disciplina:
+          type: string
+          format: uuid
+        totalVagas:
+          type: integer
     turmaUpdateRequest:
       type: object
       properties:
@@ -167,6 +264,11 @@ components:
         descricao:
           maxLength: 255
           type: string
+        disciplina:
+          type: string
+          format: uuid
+        totalVagas:
+          type: integer
   requestBodies:
     turmaCreateRequest:
       description: Turma para ser adicionada
@@ -177,6 +279,8 @@ components:
           example:
             nome: Programação Java
             descricao: Turma destinada a desenvolvedores Java
+            disciplina: 540f92d5-35b6-4a5f-8181-9439438bb871
+            totalVagas: 60
     turmaUpdateRequest:
       description: Turma para ser adicionada
       content:
