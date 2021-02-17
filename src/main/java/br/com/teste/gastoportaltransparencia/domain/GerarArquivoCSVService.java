@@ -40,9 +40,11 @@ public class GerarArquivoCSVService {
 	    try {
 	    	ByteArrayOutputStream out = new ByteArrayOutputStream();
     		CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);
-    		
+			List<String> cabecalho = Arrays.asList("CodigoIBGE", "Nome Municipio", "UF", "Mes inicio", "Mes Fim", "Total Gasto");
+			csvPrinter.printRecord(cabecalho);
+
     		for (GastoPeriodo gasto : listaGastos) {
-    			List<String> data = Arrays.asList(String.valueOf(gasto.getMunicipio().getCodigoIBGE()),
+				List<String> data = Arrays.asList(String.valueOf(gasto.getMunicipio().getCodigoIBGE()),
     					gasto.getMunicipio().getNomeIBGE(),
     					gasto.getMunicipio().getEstado().getUf(),
     					gasto.getMesInicio().getNumMes() + "/" + gasto.getAnoInicio().toString(),
