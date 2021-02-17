@@ -2,7 +2,7 @@ CREATE TABLE municipios (
   codigoibge int NOT NULL,
   estado varchar(2) DEFAULT NULL,
   nomeibge varchar(255) DEFAULT NULL,
-  paisvarchar varchar(255) DEFAULT NULL,
+  pais varchar(255) DEFAULT NULL,
   PRIMARY KEY (codigoibge)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
