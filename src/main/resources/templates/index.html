@@ -13,29 +13,34 @@
             <div class="navbar-nav" style="color: white;" th:text="${#authentication.name}"></div>
             <p><a th:href="@{/logout}">Sair</a></p>
         </nav>
-        <div class="container ">
+        <div class="container row" style="margin: auto;">
             
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="card shadow-lg p-3 mb-5 bg-body rounded align-middle">
-                    <div class="card-body d-flex justify-content-center align-items-center">
-                        <form id="formulario" th:object="${dataRequest}" th:action="@{/gastos-cartoes}" method="post">
-                        <!--<form id="formulario" th:object="${dataRequest}" >-->
-                            <div class="form-group p-6">
-                                <label for="inicio">Mês início</label>
-                                <input id="inicio" class="form-control" type="month" required th:field="*{mesInicio}" th:errorclass="error"/>
-                                <div class="invalid-feedback" th:if="${#fields.hasErrors('mesInicio')}" th:errors="*{name}"> </div>
-                            </div>
-                            <div class="form-group p-6">
-                                <label for="fim">Mês fim</label>
-                                <input id="fim" class="form-control" type="month" required th:field="*{mesFim}" th:errorclass="error"/>
-                                <div class="invalid-feedback" th:if="${#fields.hasErrors('mesFim')}" th:errors="*{name}"> </div>
-                            </div>
-                            <div class="p-12">
-                                <button class="btn btn-primary btn-block">Buscar</button>
-                            </div>
-                        </form>
+            <div class="d-flex justify-content-center align-items-center col-12">
+                <div class="p-12">
+                    <div class="card shadow-lg p-3 mb-5 bg-body rounded align-middle">
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <form id="formulario" th:object="${dataRequest}" th:action="@{/gastos-cartoes}" method="post">
+                            <!--<form id="formulario" th:object="${dataRequest}" >-->
+                                <div class="form-group p-6">
+                                    <label for="inicio">Mês início</label>
+                                    <input id="inicio" class="form-control" type="month" required th:field="*{mesInicio}" th:errorclass="error"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('mesInicio')}" th:errors="*{name}"> </div>
+                                </div>
+                                <div class="form-group p-6">
+                                    <label for="fim">Mês fim</label>
+                                    <input id="fim" class="form-control" type="month" required th:field="*{mesFim}" th:errorclass="error"/>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('mesFim')}" th:errors="*{name}"> </div>
+                                </div>
+                                <div class="p-12">
+                                    <button class="btn btn-primary btn-block">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-12" th:if="${erro != null}" >
+                <p class="alert alert-danger" th:text="${erro.descricao}"></p>
             </div>
         </div>
         

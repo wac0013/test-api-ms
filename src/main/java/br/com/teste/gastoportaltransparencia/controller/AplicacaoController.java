@@ -13,7 +13,6 @@ import br.com.teste.gastoportaltransparencia.controller.request.DataRequest;
 import br.com.teste.gastoportaltransparencia.domain.GerarArquivoCSVService;
 import lombok.RequiredArgsConstructor;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 @Controller
@@ -37,18 +36,13 @@ public class AplicacaoController {
 
         InputStream is = file.getInputStream();
 
-        try {
-            int c;
-            while ((c = is.read()) != -1) {
-                response.getWriter().write(c);
-            }
-
-            is.close();
-            response.getWriter().close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        int c;
+        while ((c = is.read()) != -1) {
+            response.getWriter().write(c);
         }
+
+        is.close();
+        response.getWriter().close();
 
     	return "index";
     }
