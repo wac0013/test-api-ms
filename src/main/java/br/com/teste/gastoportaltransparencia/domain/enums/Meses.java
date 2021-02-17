@@ -16,6 +16,6 @@ public enum Meses {
     }
     
     public String getNumMes() {
-    	return String.format("%02d", Arrays.asList(Meses.values()).indexOf(this)); 
+    	return String.format("%02d", Arrays.asList(Meses.values()).indexOf(this) + 1);
     }
 }
