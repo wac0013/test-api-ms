@@ -40,7 +40,7 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 //.loginPage("/login.html")
                 //.loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/index", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login.html?error=true")
                 //.failureHandler(authenticationFailureHandler())
                 .and().logout()

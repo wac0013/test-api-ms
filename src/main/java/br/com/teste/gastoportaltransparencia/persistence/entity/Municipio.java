@@ -1,5 +1,7 @@
 package br.com.teste.gastoportaltransparencia.persistence.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -7,6 +9,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.teste.gastoportaltransparencia.domain.enums.Estados;
 import br.com.teste.gastoportaltransparencia.persistence.converter.EstadosConverter;
@@ -19,16 +24,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "municipios")
+
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
 @Builder
-public class Municipio {
+@DynamicInsert
+@DynamicUpdate
+@Entity
+@Table(name = "municipios")
+public class Municipio implements Serializable{
 
-    @Id
+	private static final long serialVersionUID = -7835059585368113708L;
+
+	@Id
     @Column
     @Getter
     private Integer codigoIBGE;
@@ -44,7 +54,6 @@ public class Municipio {
     @Getter
     @Column(length = 2)
     @Enumerated(EnumType.STRING)
-    @Convert(converter = EstadosConverter.class)
-    private Estados uf;
+    private Estados estado;
 
 }

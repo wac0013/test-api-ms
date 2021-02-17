@@ -1,5 +1,7 @@
 package br.com.teste.gastoportaltransparencia.domain.enums;
 
+import java.util.Arrays;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -37,4 +39,8 @@ public enum Estados {
     private String nome;
     @Getter
     private String uf;
+    
+    public static Estados valueOfUf(String uf) {
+    	return Arrays.asList(Estados.values()).parallelStream().filter(estado -> estado.uf.equals(uf)).findAny().orElse(null);
+    }
 }
